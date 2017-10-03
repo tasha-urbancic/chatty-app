@@ -1,7 +1,11 @@
-import React, { Component } from "react";
-import Message from "./Message.jsx";
+import React, { Component, PropTypes } from 'react';
+import Message from './Message.jsx';
 
 class MessageList extends React.Component {
+  static propTypes = {
+    messages: PropTypes.arrayOf(PropTypes.object)
+  }
+  
   render() {
     const messages = this.props.messages.map(message => {
       return <Message 
@@ -11,7 +15,7 @@ class MessageList extends React.Component {
       />
     });
     return (
-      <main className="messages">
+      <main className='messages'>
         {messages}
       </main>
     );
