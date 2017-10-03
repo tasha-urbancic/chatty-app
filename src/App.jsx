@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
-import ChatBar from './ChatBar.jsx';
-import MessageList from './MessageList.jsx';
+import ChatBar from './components/ChatBar.jsx';
+import MessageList from './components/MessageList.jsx';
 
 var name = "Chatty";
 
