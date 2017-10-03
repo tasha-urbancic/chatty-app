@@ -1,20 +1,39 @@
-import React, { Component } from "react";
+import React, { Component, PropTypes } from 'react';
 
-class ChatBar extends React.Component {
+class ChatBar extends Component {
+
+  // so that react knows what the prop types are
+  static propTypes = {
+    currentUser: PropTypes.object,
+    sendMessage: PropTypes.func.isRequired
+  }
+
   render() {
     return (
       <footer className="chatbar">
         <input
-          className="chatbar-username"
+          className = "chatbar-username"
           defaultValue = {this.props.currentUser.name}
         />
         <input
-          className="chatbar-message"
-          placeholder="Type a message and hit ENTER"
+          className = "chatbar-message"
+          placeholder = "Type a message and hit ENTER"
+          onKeyPress = {this.handleKeyPress}
         />
       </footer>
     );
   }
+
+  // on enter send input value to sendMessage function
+  handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      console.log(event.target.value);
+      this.props.sendMessage(event.target.value);
+      event.target.value = '';
+    }
+  }
+
 }
 
 export default ChatBar;
