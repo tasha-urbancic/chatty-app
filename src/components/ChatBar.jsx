@@ -5,7 +5,8 @@ class ChatBar extends Component {
   // so that react knows what the prop types are
   static propTypes = {
     currentUser: PropTypes.string,
-    sendMessage: PropTypes.func.isRequired
+    sendMessage: PropTypes.func.isRequired,
+    updateUser: PropTypes.func.isRequired
   }
 
   render() {
@@ -14,18 +15,19 @@ class ChatBar extends Component {
         <input
           className = 'chatbar-username'
           defaultValue = {this.props.currentUser}
+          onBlur = {this.handleChangeUserEnter}
         />
         <input
           className = 'chatbar-message'
           placeholder = 'Type a message and hit ENTER'
-          onKeyPress = {this.handleKeyPress}
+          onKeyPress = {this.handleNewMessageEnter}
         />
       </footer>
     );
   }
 
   // on enter send input value to sendMessage function
-  handleKeyPress = (event) => {
+  handleNewMessageEnter = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
       this.props.sendMessage(event.target.value);
@@ -33,6 +35,15 @@ class ChatBar extends Component {
     }
   }
 
+  handleChangeUserEnter = (event) => {
+    event.preventDefault();
+    this.props.updateUser(event.target.value);
+    event.target.placeholder = event.target.value;
+  }
+
 }
+
+// onFocus={(e) => e.target.placeholder = ""} 
+// onBlur={(e) => e.target.placeholder = "Name"}
 
 export default ChatBar;
