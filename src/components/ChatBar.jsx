@@ -4,7 +4,7 @@ class ChatBar extends Component {
 
   // so that react knows what the prop types are
   static propTypes = {
-    currentUser: PropTypes.object,
+    currentUser: PropTypes.string,
     sendMessage: PropTypes.func.isRequired
   }
 
@@ -28,7 +28,6 @@ class ChatBar extends Component {
   handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       event.preventDefault();
-      console.log(event.target.value);
       this.props.sendMessage(event.target.value);
       event.target.value = '';
     }

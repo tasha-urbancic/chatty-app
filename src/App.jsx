@@ -3,53 +3,38 @@ import React, { Component } from 'react';
 import NavBar from './components/NavBar.jsx';
 import ChatBar from './components/ChatBar.jsx';
 import MessageList from './components/MessageList.jsx';
-import messages from './chatty-messages.json';
+// import messages from './chatty-messages.json';
 import user from './chatty-users.json';
-
-// chattyData = JSON.parse(chattyData);
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      messages,
+      messages: [],
       user
     };
-    this.nextId = 100;
-  }
-
-  getNewId() {
-    return this.nextId++;
   }
 
   // this is the input from chat box
   sendMessage = (content) => {
     const newMessage = {
         username: this.state.user.name,
-        content,
-        id: this.getNewId()
+        content
     };
-    console.log(`Sending a message ${newMessage.content}`);
-    this.setState({ messages: [...this.state.messages, newMessage]});
+    console.log(`Sending a message to chatty server ${newMessage.content}`);
+    this.socket.send(JSON.stringify(newMessage));
   }
 
-  // componentDidMount() {
-  //   console.log('componentDidMount <App />');
-  //   this._timer = setTimeout(() => {
-  //     console.log('Simulating incoming message');
-  //     const newMessage = {
-  //       username: 'Michelle',
-  //       content: 'Hello there!',
-  //       id: 3
-  //     };
-  //     this.setState({ messages: [...this.state.messages, newMessage]});
-  //   }, 3000);
-  // }
-
-  // componentWillUnmount() {
-  //   clearTimeout(this._timer);
-  // }
+  componentDidMount() {
+    this.socket = new WebSocket("ws://localhost:3001/");
+    console.log('Connected to server');
+    var app = this;
+    this.socket.onmessage = function (event) {
+      const newMessage = JSON.parse(event.data);
+      app.setState({ messages: [...app.state.messages, newMessage]});
+    }
+  }
 
   // pass in sendMessage Function
   render() {
