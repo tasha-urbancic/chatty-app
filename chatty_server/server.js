@@ -28,15 +28,30 @@ handleMessage = (data) => {
     dataParsed.id = uuidv1();
     dataParsed.type = 'incomingMessage'
     broadcast(JSON.stringify(dataParsed));
-  } else {
+  } else if (dataParsed.type === 'postNotification'){
     dataParsed.type = 'incomingNotification'
     dataParsed.id = uuidv1();
     broadcast(JSON.stringify(dataParsed));
+  } else {
+    console.log(dataParsed.type);
   }
+}
+
+handleNewConnection = () => {
+  const connectionNotification = {
+    content: 'New user connected!',
+    type: 'incomingNewConnection',
+    numberConnected: wss.clients.size,
+    id: uuidv1()
+  }
+
+  broadcast(JSON.stringify(connectionNotification));
 }
 
 wss.on('connection', (ws) => {
   console.log('Client connected');
+  handleNewConnection();
+
   ws.on('message', handleMessage);
   ws.on('close', () => console.log('Client disconnected'));
 });

@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from "react";
-import Message from "./Message.jsx";
-import Notification from "./Notification.jsx";
+import React, { Component, PropTypes } from 'react';
+import Message from './Message.jsx';
+import Notification from './Notification.jsx';
 
 class MessageList extends React.Component {
   static propTypes = {
@@ -12,12 +12,7 @@ class MessageList extends React.Component {
     const messages = this.props.messages.map(message => {
       switch (message.type) {
         case 'incomingNotification':
-          return (
-          <Notification 
-            content={message.content} 
-            id={message.id} 
-          />
-          );
+          return <Notification content={message.content} id={message.id} />;
         case 'incomingMessage':
           return (
             <Message
@@ -26,8 +21,15 @@ class MessageList extends React.Component {
               id={message.id}
             />
           );
+        case 'incomingNewConnection':
+          return (
+            <Notification
+              content={message.content}
+              id={message.id}
+            />
+          );
         default:
-          throw new Error('unknown event type' + message.type);
+          throw new Error('unknown event type ' + message.type);
       }
     });
 

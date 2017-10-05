@@ -9,7 +9,8 @@ class App extends Component {
     super(props);
     this.state = {
       messages: [],
-      user: { name: 'Bob' }
+      user: { name: 'Bob' },
+      numberConnected: 0
     };
   }
 
@@ -23,6 +24,8 @@ class App extends Component {
     console.log(`Sending a message to chatty server ${newMessage.content}`);
     this.socket.send(JSON.stringify(newMessage));
   };
+
+  // colorClassList=['#F5d5G', color2, fsdfds];
 
   updateUser = username => {
     const userA = this.state.user.name;
@@ -43,6 +46,7 @@ class App extends Component {
   componentDidMount() {
     this.socket = new WebSocket('ws://localhost:3001/');
     console.log('Connected to server');
+
     var app = this;
     this.socket.onmessage = function(event) {
       const data = JSON.parse(event.data);
@@ -54,7 +58,13 @@ class App extends Component {
           break;
         case 'incomingNotification':
           app.setState({
-             messages: [...app.state.messages, data] 
+            messages: [...app.state.messages, data]
+          });
+          break;
+        case 'incomingNewConnection':
+          app.setState({
+            messages: [...app.state.messages, data],
+            numberConnected: data.numberConnected
           });
           break;
         default:
@@ -66,11 +76,11 @@ class App extends Component {
 
   // pass in sendMessage Function
   render() {
-    const { messages, user} = this.state;
+    const { messages, user, numberConnected } = this.state;
     return (
       <div>
-        <NavBar />
-        <MessageList messages={messages}/>
+        <NavBar numberConnected={numberConnected}/>
+        <MessageList messages={messages} />
         <ChatBar
           currentUser={user.name}
           sendMessage={this.sendMessage}
