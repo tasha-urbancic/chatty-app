@@ -44,7 +44,16 @@ handleNewConnection = () => {
     numberConnected: wss.clients.size,
     id: uuidv1()
   }
+  broadcast(JSON.stringify(connectionNotification));
+}
 
+handleClosedConnection = () => {
+  const connectionNotification = {
+    content: 'User disconnected!',
+    type: 'incomingNewConnection',
+    numberConnected: wss.clients.size,
+    id: uuidv1()
+  }
   broadcast(JSON.stringify(connectionNotification));
 }
 
@@ -53,5 +62,8 @@ wss.on('connection', (ws) => {
   handleNewConnection();
 
   ws.on('message', handleMessage);
-  ws.on('close', () => console.log('Client disconnected'));
+  ws.on('close', () => {
+    handleClosedConnection();
+  });
+
 });
