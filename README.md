@@ -15,9 +15,15 @@ Chatty allows users to communicate with each other without having to register ac
 ### Dependencies
 
 ```
+Express Server:
 * react 15.4.2
 * react-dom 15.4.2
 * uuid 3.1.0 or later
+
+Websocket Server:
+* express 4.16.1
+* uuid 3.1.0 or later
+* ws 3.2.0
 ```
 
 ### Final Product
