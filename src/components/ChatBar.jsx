@@ -36,8 +36,14 @@ class ChatBar extends Component {
 
   handleChangeUser = event => {
     event.preventDefault();
-    this.props.updateUser(event.target.value);
-    event.target.placeholder = event.target.value;
+    const newUserName = event.target.value;
+    if (newUserName.length > 0) {
+      this.props.updateUser(newUserName );
+      event.target.defaultValue = newUserName;
+    } else {
+      console.log('Must enter a username!')
+      event.target.defaultValue = this.props.currentUser;
+    }
   };
 }
 

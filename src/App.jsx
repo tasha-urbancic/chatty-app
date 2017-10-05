@@ -15,7 +15,7 @@ class App extends Component {
     super(props);
     this.state = {
       messages: [],
-      user: {name: 'Bob', color: 'black'},
+      user: {name: 'anonymous', color: randomizeUserColor()},
       numberConnected: 0
     };
   }
