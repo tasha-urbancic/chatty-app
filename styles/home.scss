@@ -1,20 +1,22 @@
-// @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700");
+@import url("https://fonts.googleapis.com/css?family=Lobster|Raleway");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
 
+$brand-color: #7aa8ff;
+
 h1 {
-  color: #47CEFF;
+  color: $brand-color;
 }
 
 body {
   background: white;
   color: black;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 14px;
   margin: 70px 0;
 }
 
 .chatbar {
-  background: #47CEFF;
+  background: $brand-color;
   border-top: 1px solid black;
   bottom: 0;
   display: flex;
@@ -69,7 +71,7 @@ body {
 }
 
 .navbar {
-  background: #47CEFF;
+  background: $brand-color;
   border-bottom: 1px solid black;
   height: 60px;
   left: 0;
@@ -77,9 +79,12 @@ body {
   position: fixed;
   right: 0;
   top: 0;
+  display: flex;
+  align-items: center;
 }
 
 .navbar-brand {
+  font-family: 'Lobster', cursive;
   color: inherit;
   display: block;
   float: left;
@@ -89,9 +94,6 @@ body {
   line-height: 60px;
   padding: 0 10px;
   text-decoration: none;
-}
-
-.users-online {
-  float: right;
+  flex-grow: 1;
 }
 
