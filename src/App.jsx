@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
-
 import NavBar from './components/NavBar.jsx';
 import ChatBar from './components/ChatBar.jsx';
 import MessageList from './components/MessageList.jsx';
+
+const colorList=['#9BC300', '#30088B', '#CBAE00','#8D007C'];
+
+function randomizeUserColor() {
+  const randomIndex = Math.floor(Math.random()*(colorList.length-1));
+  return colorList[randomIndex];
+}
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       messages: [],
-      user: { name: 'Bob' },
+      user: {name: 'Bob', color: 'black'},
       numberConnected: 0
     };
   }
@@ -19,13 +25,12 @@ class App extends Component {
     const newMessage = {
       type: 'postMessage',
       username: this.state.user.name,
+      color: this.state.user.color,
       content
     };
     console.log(`Sending a message to chatty server ${newMessage.content}`);
     this.socket.send(JSON.stringify(newMessage));
   };
-
-  // colorClassList=['#F5d5G', color2, fsdfds];
 
   updateUser = username => {
     const userA = this.state.user.name;
@@ -39,7 +44,7 @@ class App extends Component {
         `Sending a new notification to chatty server ${newNotification.content}`
       );
       this.socket.send(JSON.stringify(newNotification));
-      this.setState({ user: { name: username } });
+      this.setState({ user: { name: username, color: randomizeUserColor()} });
     }
   };
 
