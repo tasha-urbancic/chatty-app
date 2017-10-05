@@ -11,17 +11,21 @@
 ```
 ### Dependencies
 
+```
 * react 15.4.2
 * react-dom 15.4.2
 * uuid 3.1.0 or later
+```
 
 ### Final Product
 
+```
 Conversation:
-![“Conversation”]()
+![“Conversation”](https://github.com/tasha-urbancic/chatty-app/blob/master/docs/conversation.png?raw=true)
 
 Add emoji:
-![“Add Emoji”]()
+![“Add Emoji”](https://github.com/tasha-urbancic/chatty-app/blob/master/docs/add-emoji.png?raw=true)
 
 Change Name:
-![“Change Name”]()
+![“Change Name”](https://github.com/tasha-urbancic/chatty-app/blob/master/docs/conversation.png?raw=true)
+```
