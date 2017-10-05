@@ -1,5 +1,7 @@
 # Chatty Project
 
+Chatty allows users to communicate with each other without having to register accounts. It uses React as well as modern tools for Node including Webpack and Babel.
+
 ### Getting Started
 
 ```
