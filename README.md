@@ -19,7 +19,6 @@
 
 ### Final Product
 
-```
 Conversation:
 ![“Conversation”](https://github.com/tasha-urbancic/chatty-app/blob/master/docs/conversation.png?raw=true)
 
@@ -28,4 +27,4 @@ Add emoji:
 
 Change Name:
 ![“Change Name”](https://github.com/tasha-urbancic/chatty-app/blob/master/docs/conversation.png?raw=true)
-```
+
