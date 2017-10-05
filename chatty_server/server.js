@@ -30,6 +30,7 @@ handleMessage = (data) => {
     broadcast(JSON.stringify(dataParsed));
   } else {
     dataParsed.type = 'incomingNotification'
+    dataParsed.id = uuidv1();
     broadcast(JSON.stringify(dataParsed));
   }
 }

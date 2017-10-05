@@ -4,7 +4,7 @@ class Message extends Component {
   static propTypes = {
     content: PropTypes.string,
     username: PropTypes.string,
-    id: PropTypes.number
+    id: PropTypes.string
   }
   render() {
     const {content, username, id} = this.props;
