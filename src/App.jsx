@@ -5,6 +5,8 @@ import MessageList from './components/MessageList.jsx';
 
 const colorList=['#9BC300', '#30088B', '#CBAE00','#8D007C'];
 
+// function which assigns a random color from colorList 
+// for each username change
 function randomizeUserColor() {
   const randomIndex = Math.floor(Math.random()*(colorList.length-1));
   return colorList[randomIndex];
@@ -20,7 +22,7 @@ class App extends Component {
     };
   }
 
-  // this is the input from chat box
+  // Send the chat box message to server to broadcast
   sendMessage = content => {
     const newMessage = {
       type: 'postMessage',
@@ -28,10 +30,11 @@ class App extends Component {
       color: this.state.user.color,
       content
     };
-    console.log(`Sending a message to chatty server ${newMessage.content}`);
     this.socket.send(JSON.stringify(newMessage));
   };
 
+  // update the username, and send to the server to 
+  // broadcast a notification to all users 
   updateUser = username => {
     const userA = this.state.user.name;
     if (userA !== username) {
@@ -39,10 +42,6 @@ class App extends Component {
         type: 'postNotification',
         content: `${userA} has changed their name to ${username}`
       };
-      console.log(newNotification);
-      console.log(
-        `Sending a new notification to chatty server ${newNotification.content}`
-      );
       this.socket.send(JSON.stringify(newNotification));
       this.setState({ user: { name: username, color: randomizeUserColor()} });
     }
@@ -50,8 +49,7 @@ class App extends Component {
 
   componentDidMount() {
     this.socket = new WebSocket('ws://localhost:3001/');
-    console.log('Connected to server');
-
+    console.log('Connected to websocket server');
     var app = this;
     this.socket.onmessage = function(event) {
       const data = JSON.parse(event.data);
@@ -79,7 +77,7 @@ class App extends Component {
     };
   }
 
-  // pass in sendMessage Function
+  // Render the App component
   render() {
     const { messages, user, numberConnected } = this.state;
     return (

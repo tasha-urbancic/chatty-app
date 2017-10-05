@@ -13,15 +13,16 @@ const server = express()
 // Create the WebSockets server
 const wss = new SocketServer({ server });
 
+// Function which broadcasts messages to all users
 broadcast = (data) => {
   for(let client of wss.clients) {
     if (client.readyState === 1) {
-      console.log('sending data from chatty server to all users');
       client.send(data);
     }
   }
 }
 
+// function that handles message according to data type
 handleMessage = (data) => {
   const dataParsed = JSON.parse(data);
   if (dataParsed.type === 'postMessage') {
@@ -32,11 +33,10 @@ handleMessage = (data) => {
     dataParsed.type = 'incomingNotification'
     dataParsed.id = uuidv1();
     broadcast(JSON.stringify(dataParsed));
-  } else {
-    console.log(dataParsed.type);
   }
 }
 
+// function that handles a new user connecting
 handleNewConnection = () => {
   const connectionNotification = {
     content: 'New user connected!',
@@ -47,6 +47,7 @@ handleNewConnection = () => {
   broadcast(JSON.stringify(connectionNotification));
 }
 
+// function that handles a user disconnecting
 handleClosedConnection = () => {
   const connectionNotification = {
     content: 'User disconnected!',
@@ -58,9 +59,7 @@ handleClosedConnection = () => {
 }
 
 wss.on('connection', (ws) => {
-  console.log('Client connected');
   handleNewConnection();
-
   ws.on('message', handleMessage);
   ws.on('close', () => {
     handleClosedConnection();
