@@ -23,9 +23,15 @@ broadcast = (data) => {
 }
 
 handleMessage = (data) => {
-  const messageData = JSON.parse(data);
-  messageData.id = uuidv1();
-  broadcast(JSON.stringify(messageData));
+  const dataParsed = JSON.parse(data);
+  if (dataParsed.type === 'postMessage') {
+    dataParsed.id = uuidv1();
+    dataParsed.type = 'incomingMessage'
+    broadcast(JSON.stringify(dataParsed));
+  } else {
+    dataParsed.type = 'incomingNotification'
+    broadcast(JSON.stringify(dataParsed));
+  }
 }
 
 wss.on('connection', (ws) => {

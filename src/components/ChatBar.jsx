@@ -15,7 +15,7 @@ class ChatBar extends Component {
         <input
           className = 'chatbar-username'
           defaultValue = {this.props.currentUser}
-          onBlur = {this.handleChangeUserEnter}
+          onBlur = {this.handleChangeUser}
         />
         <input
           className = 'chatbar-message'
@@ -35,7 +35,7 @@ class ChatBar extends Component {
     }
   }
 
-  handleChangeUserEnter = (event) => {
+  handleChangeUser = (event) => {
     event.preventDefault();
     this.props.updateUser(event.target.value);
     event.target.placeholder = event.target.value;

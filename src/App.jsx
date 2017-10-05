@@ -17,6 +17,7 @@ class App extends Component {
   // this is the input from chat box
   sendMessage = (content) => {
     const newMessage = {
+        type: 'postMessage',
         username: this.state.user.name,
         content
     };
@@ -25,8 +26,16 @@ class App extends Component {
   }
 
   updateUser = (username) => {
+    const userA = this.state.user.name;
+    const newNotification = {
+      type: 'postNotification',
+      content: `${userA} has changed their name to ${username}`
+    }
+    console.log(`Sending a new notification to chatty server ${newNotification.content}`);
+    this.socket.send(JSON.stringify(newNotification));
     console.log(`Updating user to ${username}`);
     this.setState({ user: {name: username}});
+  };
   }
 
 

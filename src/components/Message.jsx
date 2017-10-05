@@ -21,10 +21,6 @@ class Message extends Component {
 
 export default Message;
 
-
-
-const mightWantThisLater = `
-<div className='message system'>
-Anonymous1 changed their name to nomnom.
-</div>
-`;
+/* <div className='message system'>
+**UserA** changed their name to **UserB**
+</div> */
