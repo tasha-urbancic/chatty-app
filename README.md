@@ -35,5 +35,5 @@ Add emoji:
 ![“Add Emoji”](https://github.com/tasha-urbancic/chatty-app/blob/master/docs/add-emoji.png?raw=true)
 
 Change Name:
-![“Change Name”](https://github.com/tasha-urbancic/chatty-app/blob/master/docs/conversation.png?raw=true)
+![“Change Name”](https://github.com/tasha-urbancic/chatty-app/blob/master/docs/change-name.png?raw=true)
 
